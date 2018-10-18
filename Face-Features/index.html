@@ -49,11 +49,6 @@
 
   <script>
     window.onload = function() {
-      var width = 400;
-      var height = 400;
-      var canvas = document.getElementById('canvas');
-      var context = canvas.getContext('2d');
-
       var image = document.getElementById('image');
 
       window.fastThreshold = 10;
@@ -69,6 +64,11 @@
         });
       });
       
+      var width = 400;
+      var height = 400;
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+
       var doFindFeatures = function(x, y, w, h) {
         tracking.Fast.THRESHOLD = window.fastThreshold;
         context.drawImage(image, 0, 0, width, height);
