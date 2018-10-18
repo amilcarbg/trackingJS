@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Face Features</title>
+  <link rel="stylesheet" href="../demo.css">
+
+  <script src="../tracking-min.js"></script>
+  <script src="../face-min.js"></script>
+  <script src="../dat.gui.min.js"></script>
+
+  <style>
+  .rect {
+    border: 2px solid #a64ceb;
+    left: -1000px;
+    position: absolute;
+    top: -1000px;
+  }
+  #img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -173px 0 0 -300px;
+  }
+  .demo-container {
+    background: #131112;
+  }
+  #image {
+    position: absolute;
+    left: -1000px;
+    top: -1000px;
+  }
+  #canvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -200px 0 0 -200px;
+  }
+
+  </style>
+</head>
+<body>
+  <div class="demo-frame">
+    <div class="demo-container">
+      <img id="image" src="../1.jpg" />
+      <canvas id="canvas" width="400" height="400"></canvas>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function() {
+      var width = 400;
+      var height = 400;
+      var canvas = document.getElementById('canvas');
+      var context = canvas.getContext('2d');
+
+      var image = document.getElementById('image');
+
+      window.fastThreshold = 10;
+
+      var tracker = new tracking.ObjectTracker(['face']);
+      tracker.setStepSize(1.7);
+
+      tracking.track('#image', tracker);
+
+      tracker.on('track', function(event) {
+        event.data.forEach(function(rect) {
+          doFindFeatures(rect.x, rect.y, rect.width, rect.height);
+        });
+      });
+      
+      var doFindFeatures = function(x, y, w, h) {
+        tracking.Fast.THRESHOLD = window.fastThreshold;
+        context.drawImage(image, 0, 0, width, height);
+
+        var imageData = context.getImageData(x, y, w, h);
+        var gray = tracking.Image.grayscale(imageData.data, width, height);
+        var corners = tracking.Fast.findCorners(gray, width, height);
+
+        for (var i = 0; i < corners.length; i += 2) {
+          context.fillStyle = '#f00';
+          context.fillRect(corners[i], corners[i + 1], 3, 3);
+        }
+      };
+    }
+  </script>
+
+</body>
+</html>

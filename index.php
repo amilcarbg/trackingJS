@@ -4,3 +4,4 @@
 <a href="Color/index.html">Color with Camera</a><br>
 <a href="Face-Image/index.html">Face with Image</a><br>
 <a href="Color-Image/index.html">Color with Image</a><br>
+<a href="Face-Features/index.html">Face Features</a><br>
