@@ -74,8 +74,8 @@
         context.drawImage(image, 0, 0, width, height);
 
         var imageData = context.getImageData(x, y, w, h);
-        var gray = tracking.Image.grayscale(imageData.data, width, height);
-        var corners = tracking.Fast.findCorners(gray, width, height);
+        var gray = tracking.Image.grayscale(imageData.data, w, h);
+        var corners = tracking.Fast.findCorners(gray, w, h);
 
         for (var i = 0; i < corners.length; i += 2) {
           context.fillStyle = '#f00';
