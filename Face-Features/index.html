@@ -62,7 +62,7 @@
       tracker.on('track', function(event) {
         event.data.forEach(function(rect) {
           window.plot(rect.x, rect.y, rect.width, rect.height);
-          //doFindFeatures(rect.x, rect.y, rect.width, rect.height);
+          doFindFeatures(rect.x, rect.y, rect.width, rect.height);
         });
       });
       
