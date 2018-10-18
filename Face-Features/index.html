@@ -41,8 +41,8 @@
 </head>
 <body>
   <div class="demo-frame">
+        <img id="img" src="../2.jpeg" />
     <div class="demo-container">
-      <img id="img" src="../2.jpeg" />
       <img id="image" src="../2.jpeg" />
       <canvas id="canvas" width="400" height="400"></canvas>
     </div>
@@ -50,7 +50,8 @@
 
   <script>
     window.onload = function() {
-      var image = document.getElementById('image');
+
+      var img = document.getElementById('img');
 
       window.fastThreshold = 10;
 
@@ -62,7 +63,7 @@
       tracker.on('track', function(event) {
         event.data.forEach(function(rect) {
           window.plot(rect.x, rect.y, rect.width, rect.height);
-          doFindFeatures(rect.x, rect.y, rect.width, rect.height);
+          doFindFeatures(img.offsetLeft + rect.x, img.offsetTop + rect.y, rect.width, rect.height);
         });
       });
       
@@ -76,8 +77,10 @@
         rect.style.top = (img.offsetTop + y) + 'px';
       };
 
-      var width = 400;
-      var height = 400;
+      var image = document.getElementById('image');
+
+      var width = img.width;
+      var height = img.height;
       var canvas = document.getElementById('canvas');
       var context = canvas.getContext('2d');
 
