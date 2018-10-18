@@ -42,6 +42,7 @@
 <body>
   <div class="demo-frame">
     <div class="demo-container">
+      <img id="img" src="../2.jpeg" />
       <img id="image" src="../2.jpeg" />
       <canvas id="canvas" width="400" height="400"></canvas>
     </div>
@@ -56,7 +57,7 @@
       var tracker = new tracking.ObjectTracker(['face']);
       tracker.setStepSize(1.7);
 
-      tracking.track('#image', tracker);
+      tracking.track('#img', tracker);
 
       tracker.on('track', function(event) {
         event.data.forEach(function(rect) {
@@ -71,8 +72,8 @@
         rect.classList.add('rect');
         rect.style.width = w + 'px';
         rect.style.height = h + 'px';
-        rect.style.left = (image.offsetLeft + x) + 'px';
-        rect.style.top = (image.offsetTop + y) + 'px';
+        rect.style.left = (img.offsetLeft + x) + 'px';
+        rect.style.top = (img.offsetTop + y) + 'px';
       };
 
       var width = 400;
